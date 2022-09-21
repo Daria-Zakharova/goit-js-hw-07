@@ -56,7 +56,9 @@ const gallery = {
                 document.removeEventListener('keyup', closeElement);
             }
         });
-
+        
+        instance.show();
+        
         function closeElement(evt) {
             if (evt.key === 'Escape') {
                                 
@@ -64,7 +66,7 @@ const gallery = {
             }
         };
 
-        instance.show();
+        
     },
 };
 
