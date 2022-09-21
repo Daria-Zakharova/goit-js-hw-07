@@ -8,7 +8,7 @@ console.log(galleryItems);
 const gallerySimpleLightbox = {
 
     refs: {
-        gallery: document.querySelector('.gallery'),        
+        gallery: document.querySelector('.gallery'),
     },
     lightboxWrapSelector: '.gallery a',
     items: galleryItems,
@@ -19,31 +19,26 @@ const gallerySimpleLightbox = {
         <img class="gallery__image" src="${preview}" alt="${description}"/>
         </a></li>`;
 
-        return template;        
+        return template;
     },
 
     createMarkup() {
         return this.items.map(this.markupTemplate).join('');
     },
 
-    renderMarkup() {
-        this.refs.gallery.insertAdjacentHTML('beforeend', this.createMarkup());
-        this.makeClickable();
-    },
-
-    makeClickable() {
-        this.refs.gallery.addEventListener('click', this.onClick.bind(gallerySimpleLightbox));
-    },
-
-    onClick(evt) {
-        evt.preventDefault();
-
+    createLightbox() {
         const lightbox = new SimpleLightbox(this.lightboxWrapSelector, {
             captionsData: 'alt',
             captionDelay: 250,
             showCounter: false,
         });
+        
         lightbox.on('closed.simplelightbox', () => { lightbox.refresh() });
+    },
+
+    renderMarkup() {
+        this.refs.gallery.insertAdjacentHTML('beforeend', this.createMarkup());
+        this.createLightbox();
     },
 };
 gallerySimpleLightbox.renderMarkup();
