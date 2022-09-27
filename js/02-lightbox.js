@@ -27,18 +27,18 @@ const gallerySimpleLightbox = {
     },
 
     createLightbox() {
+        this.renderMarkup();
         const lightbox = new SimpleLightbox(this.lightboxWrapSelector, {
             captionsData: 'alt',
             captionDelay: 250,
-            showCounter: false,
-        });
-        
-        lightbox.on('closed.simplelightbox', () => { lightbox.refresh() });
+        });        
     },
 
     renderMarkup() {
         this.refs.gallery.insertAdjacentHTML('beforeend', this.createMarkup());
-        this.createLightbox();
+        
+        
     },
 };
-gallerySimpleLightbox.renderMarkup();
+
+gallerySimpleLightbox.createLightbox();
